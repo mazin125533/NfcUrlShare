@@ -12,5 +12,11 @@
     <string name="invalid_url">http:// または https:// で始まる URL を入力してください</string>
     <string name="qr_description">共有する URL の QR コード</string>
     <string name="qr_caption">NFC が使えない相手は QR コードを読み取ってください</string>
+    <string name="history">履歴</string>
+    <string name="history_clear">すべて消去</string>
+    <string name="history_hint">タップでもう一度共有 / 長押しで削除</string>
+    <string name="history_clear_confirm">履歴をすべて消去しますか？</string>
+    <string name="history_removed">履歴から削除しました</string>
+    <string name="cancel">キャンセル</string>
     <string name="note">この画面を開いている間だけ URL を渡します。相手の端末は画面ロックを解除し、NFC をオンにしてください。</string>
 </resources>
