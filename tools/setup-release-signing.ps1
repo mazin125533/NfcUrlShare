@@ -1,4 +1,4 @@
-# リリース用の署名鍵を作り、GitHub Actions の Secrets に登録する（最初に1回だけ実行）
+﻿# リリース用の署名鍵を作り、GitHub Actions の Secrets に登録する（最初に1回だけ実行）
 #
 #   powershell -ExecutionPolicy Bypass -File tools\setup-release-signing.ps1
 #
