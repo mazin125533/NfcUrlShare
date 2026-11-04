@@ -26,3 +26,18 @@ APK は `app/build/outputs/apk/debug/` に出力されます。
 
 ## ライブラリ
 - [ZXing core](https://github.com/zxing/zxing)（Apache License 2.0）: QR コード生成
+
+## リリース（GitHub Actions）
+`v*` タグを push すると、署名付きの APK がビルドされて GitHub Release に添付されます。
+```
+git tag v1.0.0
+git push origin v1.0.0
+```
+main への push と PR でもリリース APK をビルドし、Actions の Artifacts に保存します。
+
+### 署名鍵の準備（最初に1回だけ）
+```
+powershell -ExecutionPolicy Bypass -File tools\setup-release-signing.ps1
+```
+鍵を `%USERPROFILE%\.keystores` に作成し、GitHub Secrets（`ANDROID_KEYSTORE_BASE64` / `ANDROID_KEYSTORE_PASSWORD` / `ANDROID_KEY_ALIAS` / `ANDROID_KEY_PASSWORD`）に登録します。
+**鍵とパスワードのファイルは必ずバックアップしてください。** 失うと同じアプリとして更新できなくなります。
