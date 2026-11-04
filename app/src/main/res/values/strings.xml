@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">NFC URL共有</string>
+    <string name="service_description">URL を NFC タグとして渡す</string>
+    <string name="url_hint">共有する URL（https://…）</string>
+    <string name="apply">この URL を使う</string>
+    <string name="nfc_settings">NFC 設定を開く</string>
+    <string name="status_ready">相手のスマホの背面にかざしてください</string>
+    <string name="status_no_url">Chrome の「共有」からこのアプリを選ぶか、URL を入力してください</string>
+    <string name="status_nfc_off">NFC がオフです。設定でオンにしてください</string>
+    <string name="status_no_nfc">この端末は NFC / HCE に対応していません</string>
+    <string name="status_sent">送信しました</string>
+    <string name="invalid_url">http:// または https:// で始まる URL を入力してください</string>
+    <string name="qr_description">共有する URL の QR コード</string>
+    <string name="qr_caption">NFC が使えない相手は QR コードを読み取ってください</string>
+    <string name="note">この画面を開いている間だけ URL を渡します。相手の端末は画面ロックを解除し、NFC をオンにしてください。</string>
+</resources>
