@@ -73,6 +73,7 @@ class MainActivity : Activity() {
         super.onResume()
         SharedUrl.active = true
         SharedUrl.onSent = {
+            Haptics.sent(this)
             runOnUiThread { Toast.makeText(this, R.string.status_sent, Toast.LENGTH_SHORT).show() }
         }
         // 同じ AID を使う他のアプリより、この画面を開いている間はこのアプリを優先する

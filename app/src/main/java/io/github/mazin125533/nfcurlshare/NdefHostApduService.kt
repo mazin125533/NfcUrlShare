@@ -17,6 +17,8 @@ class NdefHostApduService : HostApduService() {
 
     private var selected = Selected.NONE
     private var ndefFile: ByteArray? = null
+    /** 1回かざすごとに送信完了の通知は1度だけ（読み直す端末もあるため） */
+    private var sentNotified = false
 
     override fun processCommandApdu(apdu: ByteArray, extras: Bundle?): ByteArray {
         if (apdu.size < 4) return SW_WRONG_LENGTH
@@ -76,7 +78,8 @@ class NdefHostApduService : HostApduService() {
         val end = minOf(file.size, offset + le)
         val chunk = file.copyOfRange(offset, end)
 
-        if (selected == Selected.NDEF && end == file.size && offset > 0) {
+        if (selected == Selected.NDEF && end == file.size && offset > 0 && !sentNotified) {
+            sentNotified = true
             SharedUrl.onSent?.invoke()   // 本体を最後まで読まれた
         }
         return chunk + SW_OK
@@ -85,6 +88,7 @@ class NdefHostApduService : HostApduService() {
     override fun onDeactivated(reason: Int) {
         selected = Selected.NONE
         ndefFile = null
+        sentNotified = false
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package io.github.mazin125533.nfcurlshare
 
 import android.nfc.NdefMessage
+import android.nfc.cardemulation.HostApduService
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
@@ -46,6 +47,24 @@ class NdefHostApduServiceTest {
         val url = "https://example.com/" + "a".repeat(600)
         assertTrue(SharedUrl.set(url))
         assertEquals(url, readTag(maxRead = 0x3B))
+    }
+
+    @Test
+    fun sentIsNotifiedOncePerTap() {
+        assertTrue(SharedUrl.set("https://example.com/"))
+        var count = 0
+        SharedUrl.onSent = { count++ }
+        try {
+            readTag(maxRead = 0xFF)
+            readTag(maxRead = 0xFF)              // 同じタップ中に読み直されても1回だけ
+            assertEquals(1, count)
+
+            service.onDeactivated(HostApduService.DEACTIVATION_LINK_LOSS)   // 離して
+            readTag(maxRead = 0xFF)              // もう一度かざす
+            assertEquals(2, count)
+        } finally {
+            SharedUrl.onSent = null
+        }
     }
 
     @Test
